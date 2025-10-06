@@ -428,4 +428,5 @@ FodyWeavers.xsd
 *.msp
 
 # Oversized datasets
-Transition1x.h5
+data/Transition1x.h5
+data/RGD1_CHNO.h5
