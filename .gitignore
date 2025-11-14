@@ -10,6 +10,7 @@
 *.userosscache
 *.sln.docstates
 *.env
+.venv/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -430,3 +431,6 @@ FodyWeavers.xsd
 # Oversized datasets
 data/Transition1x.h5
 data/RGD1_CHNO.h5
+
+# macOS
+.DS_Store
