@@ -429,7 +429,7 @@ FodyWeavers.xsd
 *.msp
 
 # Oversized datasets
-data/Transition1x.h5
+data/transition1x_dataset.h5
 data/RGD1_CHNO.h5
 
 # macOS
