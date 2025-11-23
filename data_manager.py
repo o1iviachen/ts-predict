@@ -17,8 +17,8 @@ class DataManager():
             parses hdf5 files in the transition1x dataset format
         sql_insert_reactions(data, reaction_type_id, source_id, cursor)
             inserts reactions into SQL ts-predict-db database
-
     """
+    
     @staticmethod
     def xyz_file_parser(file_directory):
         """
@@ -132,8 +132,8 @@ class DataManager():
                     # For each structure, create a structure dictionary
                     for structure in structures:
                         atomic_numbers = file["data"][molecule][reaction][structure]["atomic_numbers"][:].tolist()
-                        coordinates = file["data"][molecule][reaction][structure]["positions"][:].tolist()
-                        
+                        coordinates = file["data"][molecule][reaction][structure]["positions"][:][0].tolist()
+
                         # Employ dummy atom masking
                         while len(atomic_numbers) < longest_array:
                             atomic_numbers.append(0)
@@ -175,3 +175,18 @@ class DataManager():
                 for value in reaction_dict.values()
             )
             cursor.execute(script, reaction_tuple)
+
+    @staticmethod
+    def sql_parse_reactions(reactions, columns):
+        reaction_dicts = []
+        for reaction in reactions:
+            reaction_dict = {}
+            for i in range(len(reaction)):
+                if isinstance(reaction[i], str):
+                    value = json.loads(reaction[i])
+                else:
+                    value = reaction[i]
+                reaction_dict[columns[i]] = value
+            reaction_dicts.append(reaction_dict)
+        
+        return reaction_dicts
