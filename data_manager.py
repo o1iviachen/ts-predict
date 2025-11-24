@@ -17,6 +17,8 @@ class DataManager():
             parses hdf5 files in the transition1x dataset format
         sql_insert_reactions(data, reaction_type_id, source_id, cursor)
             inserts reactions into SQL ts-predict-db database
+        sql_parse_reactions(reactions, columns):
+            parse through SQL response to convert reactions to directionaries
     """
     
     @staticmethod
@@ -178,7 +180,20 @@ class DataManager():
 
     @staticmethod
     def sql_parse_reactions(reactions, columns):
+        """
+        Parses SQL response to reaction dictionaries
+        
+        Arguments
+            reactions (dict): SQL dictionary
+            columns (list): list of SQL columns
+        
+        Returns
+            reaction_dicts: list of dictionaries representing reactions
+        """
+    
         reaction_dicts = []
+
+        # Loop through reactions and convert JSON strings to dictionaries
         for reaction in reactions:
             reaction_dict = {}
             for i in range(len(reaction)):
